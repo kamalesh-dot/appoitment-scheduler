@@ -1,0 +1,57 @@
+#include <stdio.h>
+        switch (choice) {
+            case '1':
+                addAppointment();
+                break;
+            case '2':
+                displayAppointments();
+                break;
+            case '3':
+                if (numAppointments == 0) {
+                    printf("No appointments to delete.\n");
+                } else {
+                    int index;
+                    printf("Enter index of appointment to delete: ");
+                    scanf("%d", &index);
+                    deleteAppointment(index - 1);
+                }
+                break;
+            case '4':
+                if (numAppointments == 0) {
+                    printf("No appointments to search.\n");
+                } else {
+                    char searchName[MAX_NAME_LENGTH];
+                    printf("Enter name of appointment to search: ");
+                    scanf("%s", searchName);
+                    int result = searchAppointment(searchName);
+                    if (result != -1) {
+                        printf("Appointment found at index %d.\n", result + 1);
+                    } else {
+                        printf("Appointment not found.\n");
+                    }
+                }
+                break;
+            case '5':
+                if (numAppointments == 0) {
+                    printf("No appointments to update.\n");
+                } else {
+                    char updateName[MAX_NAME_LENGTH];
+                    printf("Enter name of appointment to update: ");
+                    scanf("%s", updateName);
+                    int updateIndex = searchAppointment(updateName);
+                    if (updateIndex != -1) {
+                        updateAppointment(updateIndex);
+                    } else {
+                        printf("Appointment not found.\n");
+                    }
+                }
+                break;
+            case '6':
+                printf("Exiting program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (choice != '6');
+    return 0;
+}
